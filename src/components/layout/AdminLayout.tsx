@@ -1,5 +1,6 @@
 import { Link, Outlet, useRouterState } from "@tanstack/react-router";
 
+import { LogoLink } from "@/components/brand/Logo";
 import { NavLink } from "@/components/layout/NavLink";
 import { adminNav, isActivePath } from "@/config/navigation";
 
@@ -15,10 +16,8 @@ export function AdminLayout() {
     <div className="min-h-screen bg-background md:grid md:grid-cols-[15rem_1fr]">
       <aside className="border-b border-sidebar-border bg-sidebar md:sticky md:top-0 md:h-screen md:border-r md:border-b-0">
         <div className="container-page flex h-14 items-center justify-between md:px-4">
-          <Link to="/admin" className="font-display text-xs uppercase tracking-[0.24em]">
-            Chronos<span className="text-primary"> Admin</span>
-          </Link>
-          <Link to="/" className="text-xs text-muted-foreground hover:text-foreground">
+          <LogoLink to="/admin" size="sm" />
+          <Link to="/" className="text-meta text-muted-foreground transition-control hover:text-foreground">
             Site
           </Link>
         </div>

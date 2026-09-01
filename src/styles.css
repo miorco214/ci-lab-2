@@ -5,10 +5,10 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * CHRONOS INSTRU LAB — fondations du design system.
+ * CHRONOS INSTRU LAB — design system (source de vérité visuelle unique).
  *
- * Règle: aucune valeur de couleur, rayon, ombre ou police en dur dans les
- * composants. Tout passe par les tokens définis ici.
+ * Règle: aucune valeur de couleur, rayon, ombre, durée ou police en dur dans
+ * les composants. Tout passe par les tokens définis ici.
  *
  * Direction: noir dominant, surface claire, vert CHRONOS utilisé uniquement
  * comme signature (accent), jamais comme couleur de fond généralisée.
@@ -22,9 +22,12 @@
  */
 
 @theme inline {
+  /* ---------------------------------------------------------------- Type */
   --font-display: "Clash Display", "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
 
+  /* ------------------------------------------------------------- Rayons */
+  --radius-xs: calc(var(--radius) - 8px);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -33,6 +36,7 @@
   --radius-3xl: calc(var(--radius) + 12px);
   --radius-4xl: calc(var(--radius) + 16px);
 
+  /* ------------------------------------------------------------ Couleurs */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -50,17 +54,22 @@
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
   --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
   --color-input: var(--input);
   --color-ring: var(--ring);
   --color-ring-offset-background: var(--background);
   --color-surface: var(--surface);
   --color-surface-foreground: var(--surface-foreground);
   --color-elevated: var(--elevated);
+  --color-overlay: var(--overlay);
   --color-brand-deep: var(--brand-deep);
+  --color-brand-accent-2: var(--brand-accent-2);
   --color-success: var(--success);
   --color-success-foreground: var(--success-foreground);
   --color-warning: var(--warning);
   --color-warning-foreground: var(--warning-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
   --color-chart-3: var(--chart-3);
@@ -75,12 +84,64 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
+  /* -------------------------------------------------- Ombres/élévations */
+  --shadow-none: none;
   --shadow-soft: 0 1px 2px oklch(0 0 0 / 0.4);
+  --shadow-raised: 0 6px 18px -10px oklch(0 0 0 / 0.65);
   --shadow-elevated: 0 18px 48px -24px oklch(0 0 0 / 0.75);
+  --shadow-overlay: 0 32px 80px -32px oklch(0 0 0 / 0.85);
+  --shadow-signature: 0 0 0 1px color-mix(in oklab, var(--primary) 26%, transparent);
 
+  /* ---------------------------------------------------------- Espacement */
   --spacing-gutter: 1.25rem;
   --spacing-section: 3.5rem;
+  --spacing-section-lg: 6rem;
   --spacing-tabbar: 4.5rem;
+  --spacing-header: 3.5rem;
+
+  /* -------------------------------------------------------- Conteneurs */
+  --container-content: 44rem;
+  --container-page: 80rem;
+  --container-wide: 90rem;
+
+  /* -------------------------------------------------- Contrôles/icônes */
+  --size-control-sm: 2.25rem;
+  --size-control-md: 2.75rem;
+  --size-control-lg: 3.25rem;
+  --size-touch: 2.75rem;
+  --size-icon-sm: 1rem;
+  --size-icon-md: 1.25rem;
+  --size-icon-lg: 1.5rem;
+
+  /* ------------------------------------------------------------ Motion */
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-entrance: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-instant: 90ms;
+  --duration-fast: 160ms;
+  --duration-normal: 240ms;
+  --duration-slow: 400ms;
+
+  --animate-fade-up: fade-up var(--duration-slow) var(--ease-entrance) both;
+  --animate-fade-in: fade-in var(--duration-normal) var(--ease-standard) both;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translate3d(0, 10px, 0);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 }
 
 :root {
@@ -92,20 +153,22 @@
   --surface: oklch(0.986 0 0);
   --surface-foreground: oklch(0.06 0 0);
   --elevated: oklch(0.14 0 0);
+  --overlay: oklch(0 0 0 / 72%);
 
   --card: oklch(0.11 0 0);
   --card-foreground: oklch(0.97 0 0);
-  --popover: oklch(0.11 0 0);
+  --popover: oklch(0.12 0 0);
   --popover-foreground: oklch(0.97 0 0);
 
   --primary: oklch(0.68 0.18 155);
   --primary-foreground: oklch(0.06 0 0);
+  --brand-accent-2: oklch(0.62 0.17 154);
   --brand-deep: oklch(0.38 0.1 155);
 
   --secondary: oklch(0.17 0 0);
   --secondary-foreground: oklch(0.97 0 0);
   --muted: oklch(0.16 0 0);
-  --muted-foreground: oklch(0.68 0 0);
+  --muted-foreground: oklch(0.7 0 0);
   --accent: oklch(0.62 0.17 154);
   --accent-foreground: oklch(0.06 0 0);
 
@@ -115,10 +178,13 @@
   --success-foreground: oklch(0.06 0 0);
   --warning: oklch(0.78 0.15 80);
   --warning-foreground: oklch(0.06 0 0);
+  --info: oklch(0.75 0.06 230);
+  --info-foreground: oklch(0.06 0 0);
 
   --border: oklch(1 0 0 / 12%);
+  --border-strong: oklch(1 0 0 / 22%);
   --input: oklch(1 0 0 / 16%);
-  --ring: oklch(0.68 0.18 155 / 60%);
+  --ring: oklch(0.68 0.18 155 / 70%);
 
   --chart-1: oklch(0.68 0.18 155);
   --chart-2: oklch(0.62 0.17 154);
@@ -133,7 +199,7 @@
   --sidebar-accent: oklch(0.16 0 0);
   --sidebar-accent-foreground: oklch(0.97 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.68 0.18 155 / 60%);
+  --sidebar-ring: oklch(0.68 0.18 155 / 70%);
 }
 
 .dark {
@@ -147,6 +213,7 @@
 
   html {
     -webkit-tap-highlight-color: transparent;
+    scroll-behavior: smooth;
   }
 
   body {
@@ -155,6 +222,7 @@
     font-family: var(--font-sans);
     font-feature-settings: "cv02", "cv03", "cv04";
     text-rendering: optimizeLegibility;
+    overflow-x: hidden;
   }
 
   /* Clash Display reste rare: uniquement identité et grands titres. */
@@ -167,11 +235,142 @@
     outline: 2px solid var(--color-ring);
     outline-offset: 2px;
   }
+
+  /* Aucune animation décorative lorsque l'utilisateur demande moins de
+     mouvement: les changements d'état restent perceptibles. */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
 }
+
+/* ---------------------------------------------------------------- Layout */
 
 @utility container-page {
   width: 100%;
   margin-inline: auto;
-  max-width: 80rem;
+  max-width: var(--container-page);
   padding-inline: var(--spacing-gutter);
+}
+
+@utility container-content {
+  width: 100%;
+  margin-inline: auto;
+  max-width: var(--container-content);
+}
+
+/* Niveaux de surface — jamais de couleur ad hoc dans les composants. */
+@utility surface-base {
+  background-color: var(--color-background);
+}
+@utility surface-raised {
+  background-color: var(--color-card);
+  border: 1px solid var(--color-border);
+}
+@utility surface-elevated {
+  background-color: var(--color-elevated);
+  border: 1px solid var(--color-border-strong);
+  box-shadow: var(--shadow-elevated);
+}
+@utility surface-inverse {
+  background-color: var(--color-surface);
+  color: var(--color-surface-foreground);
+}
+
+/* ------------------------------------------------------- Échelle de type */
+
+@utility text-hero {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(3.25rem, 9vw, 7.5rem);
+  line-height: 0.94;
+  letter-spacing: -0.03em;
+}
+
+@utility text-section-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2rem, 5vw, 4rem);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+}
+
+@utility text-display-sm {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+@utility text-nav {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 0.9375rem;
+  letter-spacing: 0.01em;
+}
+
+@utility text-cta {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.005em;
+}
+
+@utility text-body {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 1.125rem;
+  line-height: 1.7;
+}
+
+@utility text-body-sm {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+/* Métadonnées de beat: BPM, tonalité, durée, style. */
+@utility text-meta {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 0.875rem;
+  letter-spacing: 0.01em;
+}
+
+@utility text-eyebrow {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+}
+
+/* ------------------------------------------------------------- Motion UI */
+
+@utility transition-control {
+  transition-property: color, background-color, border-color, box-shadow, opacity, transform;
+  transition-duration: var(--duration-fast);
+  transition-timing-function: var(--ease-standard);
+}
+
+/* Micro-interaction discrète sur les contrôles pressables. */
+@utility press {
+  transition-property: transform, background-color, border-color, box-shadow, color;
+  transition-duration: var(--duration-instant);
+  transition-timing-function: var(--ease-standard);
+
+  &:active:not(:disabled) {
+    transform: scale(0.985);
+  }
 }

@@ -1,5 +1,6 @@
-import { Link, Outlet, useRouterState } from "@tanstack/react-router";
+import { Outlet, useRouterState } from "@tanstack/react-router";
 
+import { LogoLink } from "@/components/brand/Logo";
 import { NavLink } from "@/components/layout/NavLink";
 import { AppShell } from "@/components/layout/PublicLayout";
 import { PageContainer } from "@/components/layout/PageContainer";
@@ -9,10 +10,8 @@ function AccountHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background/85 backdrop-blur">
       <div className="container-page flex h-14 items-center justify-between">
-        <Link to="/" className="font-display text-sm uppercase tracking-[0.28em]">
-          Chronos<span className="text-primary"> Instru Lab</span>
-        </Link>
-        <span className="text-xs uppercase tracking-[0.18em] text-muted-foreground">Compte</span>
+        <LogoLink size="sm" />
+        <span className="text-eyebrow text-muted-foreground">Compte</span>
       </div>
     </header>
   );
