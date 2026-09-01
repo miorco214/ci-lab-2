@@ -142,6 +142,16 @@
       opacity: 1;
     }
   }
+  /* Indicateur de navigation: discret, jamais bloquant. */
+  @keyframes route-progress {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(300%);
+    }
+  }
+
 }
 
 :root {
