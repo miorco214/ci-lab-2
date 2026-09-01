@@ -9,50 +9,491 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
+import { Route as PublicRouteImport } from './routes/_public'
+import { Route as AccountRouteImport } from './routes/account'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as PublicIndexRouteImport } from './routes/_public.index'
+import { Route as PublicBeatsRouteImport } from './routes/_public.beats'
+import { Route as PublicCartRouteImport } from './routes/_public.cart'
+import { Route as PublicCheckoutRouteImport } from './routes/_public.checkout'
+import { Route as AccountIndexRouteImport } from './routes/account.index'
+import { Route as AccountDownloadsRouteImport } from './routes/account.downloads'
+import { Route as AccountFavoritesRouteImport } from './routes/account.favorites'
+import { Route as AccountPurchasesRouteImport } from './routes/account.purchases'
+import { Route as AccountSettingsRouteImport } from './routes/account.settings'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as AdminAnalyticsRouteImport } from './routes/admin.analytics'
+import { Route as AdminCatalogRouteImport } from './routes/admin.catalog'
+import { Route as AdminCommerceRouteImport } from './routes/admin.commerce'
+import { Route as AdminSecurityRouteImport } from './routes/admin.security'
+import { Route as AdminUsersRouteImport } from './routes/admin.users'
+import { Route as PublicBeatSlugRouteImport } from './routes/_public.beat.$slug'
+import { Route as PublicStylesIndexRouteImport } from './routes/_public.styles.index'
+import { Route as PublicStylesSlugRouteImport } from './routes/_public.styles.$slug'
 
-const IndexRoute = IndexRouteImport.update({
+const PublicRoute = PublicRouteImport.update({
+  id: '/_public',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AccountRoute = AccountRouteImport.update({
+  id: '/account',
+  path: '/account',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PublicIndexRoute = PublicIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => PublicRoute,
+} as any)
+const PublicBeatsRoute = PublicBeatsRouteImport.update({
+  id: '/beats',
+  path: '/beats',
+  getParentRoute: () => PublicRoute,
+} as any)
+const PublicCartRoute = PublicCartRouteImport.update({
+  id: '/cart',
+  path: '/cart',
+  getParentRoute: () => PublicRoute,
+} as any)
+const PublicCheckoutRoute = PublicCheckoutRouteImport.update({
+  id: '/checkout',
+  path: '/checkout',
+  getParentRoute: () => PublicRoute,
+} as any)
+const AccountIndexRoute = AccountIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AccountRoute,
+} as any)
+const AccountDownloadsRoute = AccountDownloadsRouteImport.update({
+  id: '/downloads',
+  path: '/downloads',
+  getParentRoute: () => AccountRoute,
+} as any)
+const AccountFavoritesRoute = AccountFavoritesRouteImport.update({
+  id: '/favorites',
+  path: '/favorites',
+  getParentRoute: () => AccountRoute,
+} as any)
+const AccountPurchasesRoute = AccountPurchasesRouteImport.update({
+  id: '/purchases',
+  path: '/purchases',
+  getParentRoute: () => AccountRoute,
+} as any)
+const AccountSettingsRoute = AccountSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AccountRoute,
+} as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminAnalyticsRoute = AdminAnalyticsRouteImport.update({
+  id: '/analytics',
+  path: '/analytics',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminCatalogRoute = AdminCatalogRouteImport.update({
+  id: '/catalog',
+  path: '/catalog',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminCommerceRoute = AdminCommerceRouteImport.update({
+  id: '/commerce',
+  path: '/commerce',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminSecurityRoute = AdminSecurityRouteImport.update({
+  id: '/security',
+  path: '/security',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminUsersRoute = AdminUsersRouteImport.update({
+  id: '/users',
+  path: '/users',
+  getParentRoute: () => AdminRoute,
+} as any)
+const PublicBeatSlugRoute = PublicBeatSlugRouteImport.update({
+  id: '/beat/$slug',
+  path: '/beat/$slug',
+  getParentRoute: () => PublicRoute,
+} as any)
+const PublicStylesIndexRoute = PublicStylesIndexRouteImport.update({
+  id: '/styles/',
+  path: '/styles/',
+  getParentRoute: () => PublicRoute,
+} as any)
+const PublicStylesSlugRoute = PublicStylesSlugRouteImport.update({
+  id: '/styles/$slug',
+  path: '/styles/$slug',
+  getParentRoute: () => PublicRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
+  '/': typeof PublicIndexRoute
+  '/account': typeof AccountRouteWithChildren
+  '/admin': typeof AdminRouteWithChildren
+  '/beats': typeof PublicBeatsRoute
+  '/cart': typeof PublicCartRoute
+  '/checkout': typeof PublicCheckoutRoute
+  '/account/downloads': typeof AccountDownloadsRoute
+  '/account/favorites': typeof AccountFavoritesRoute
+  '/account/purchases': typeof AccountPurchasesRoute
+  '/account/settings': typeof AccountSettingsRoute
+  '/admin/analytics': typeof AdminAnalyticsRoute
+  '/admin/catalog': typeof AdminCatalogRoute
+  '/admin/commerce': typeof AdminCommerceRoute
+  '/admin/security': typeof AdminSecurityRoute
+  '/admin/users': typeof AdminUsersRoute
+  '/account/': typeof AccountIndexRoute
+  '/admin/': typeof AdminIndexRoute
+  '/beat/$slug': typeof PublicBeatSlugRoute
+  '/styles/$slug': typeof PublicStylesSlugRoute
+  '/styles/': typeof PublicStylesIndexRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
+  '/beats': typeof PublicBeatsRoute
+  '/cart': typeof PublicCartRoute
+  '/checkout': typeof PublicCheckoutRoute
+  '/account/downloads': typeof AccountDownloadsRoute
+  '/account/favorites': typeof AccountFavoritesRoute
+  '/account/purchases': typeof AccountPurchasesRoute
+  '/account/settings': typeof AccountSettingsRoute
+  '/admin/analytics': typeof AdminAnalyticsRoute
+  '/admin/catalog': typeof AdminCatalogRoute
+  '/admin/commerce': typeof AdminCommerceRoute
+  '/admin/security': typeof AdminSecurityRoute
+  '/admin/users': typeof AdminUsersRoute
+  '/': typeof PublicIndexRoute
+  '/account': typeof AccountIndexRoute
+  '/admin': typeof AdminIndexRoute
+  '/beat/$slug': typeof PublicBeatSlugRoute
+  '/styles/$slug': typeof PublicStylesSlugRoute
+  '/styles': typeof PublicStylesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
+  '/_public': typeof PublicRouteWithChildren
+  '/account': typeof AccountRouteWithChildren
+  '/admin': typeof AdminRouteWithChildren
+  '/_public/beats': typeof PublicBeatsRoute
+  '/_public/cart': typeof PublicCartRoute
+  '/_public/checkout': typeof PublicCheckoutRoute
+  '/account/downloads': typeof AccountDownloadsRoute
+  '/account/favorites': typeof AccountFavoritesRoute
+  '/account/purchases': typeof AccountPurchasesRoute
+  '/account/settings': typeof AccountSettingsRoute
+  '/admin/analytics': typeof AdminAnalyticsRoute
+  '/admin/catalog': typeof AdminCatalogRoute
+  '/admin/commerce': typeof AdminCommerceRoute
+  '/admin/security': typeof AdminSecurityRoute
+  '/admin/users': typeof AdminUsersRoute
+  '/_public/': typeof PublicIndexRoute
+  '/account/': typeof AccountIndexRoute
+  '/admin/': typeof AdminIndexRoute
+  '/_public/beat/$slug': typeof PublicBeatSlugRoute
+  '/_public/styles/$slug': typeof PublicStylesSlugRoute
+  '/_public/styles/': typeof PublicStylesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/account'
+    | '/admin'
+    | '/beats'
+    | '/cart'
+    | '/checkout'
+    | '/account/downloads'
+    | '/account/favorites'
+    | '/account/purchases'
+    | '/account/settings'
+    | '/admin/analytics'
+    | '/admin/catalog'
+    | '/admin/commerce'
+    | '/admin/security'
+    | '/admin/users'
+    | '/account/'
+    | '/admin/'
+    | '/beat/$slug'
+    | '/styles/$slug'
+    | '/styles/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/beats'
+    | '/cart'
+    | '/checkout'
+    | '/account/downloads'
+    | '/account/favorites'
+    | '/account/purchases'
+    | '/account/settings'
+    | '/admin/analytics'
+    | '/admin/catalog'
+    | '/admin/commerce'
+    | '/admin/security'
+    | '/admin/users'
+    | '/'
+    | '/account'
+    | '/admin'
+    | '/beat/$slug'
+    | '/styles/$slug'
+    | '/styles'
+  id:
+    | '__root__'
+    | '/_public'
+    | '/account'
+    | '/admin'
+    | '/_public/beats'
+    | '/_public/cart'
+    | '/_public/checkout'
+    | '/account/downloads'
+    | '/account/favorites'
+    | '/account/purchases'
+    | '/account/settings'
+    | '/admin/analytics'
+    | '/admin/catalog'
+    | '/admin/commerce'
+    | '/admin/security'
+    | '/admin/users'
+    | '/_public/'
+    | '/account/'
+    | '/admin/'
+    | '/_public/beat/$slug'
+    | '/_public/styles/$slug'
+    | '/_public/styles/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
+  PublicRoute: typeof PublicRouteWithChildren
+  AccountRoute: typeof AccountRouteWithChildren
+  AdminRoute: typeof AdminRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
+    '/_public': {
+      id: '/_public'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof PublicRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/account': {
+      id: '/account'
+      path: '/account'
+      fullPath: '/account'
+      preLoaderRoute: typeof AccountRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_public/': {
+      id: '/_public/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof PublicIndexRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/_public/beats': {
+      id: '/_public/beats'
+      path: '/beats'
+      fullPath: '/beats'
+      preLoaderRoute: typeof PublicBeatsRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/_public/cart': {
+      id: '/_public/cart'
+      path: '/cart'
+      fullPath: '/cart'
+      preLoaderRoute: typeof PublicCartRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/_public/checkout': {
+      id: '/_public/checkout'
+      path: '/checkout'
+      fullPath: '/checkout'
+      preLoaderRoute: typeof PublicCheckoutRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/account/': {
+      id: '/account/'
+      path: '/'
+      fullPath: '/account/'
+      preLoaderRoute: typeof AccountIndexRouteImport
+      parentRoute: typeof AccountRoute
+    }
+    '/account/downloads': {
+      id: '/account/downloads'
+      path: '/downloads'
+      fullPath: '/account/downloads'
+      preLoaderRoute: typeof AccountDownloadsRouteImport
+      parentRoute: typeof AccountRoute
+    }
+    '/account/favorites': {
+      id: '/account/favorites'
+      path: '/favorites'
+      fullPath: '/account/favorites'
+      preLoaderRoute: typeof AccountFavoritesRouteImport
+      parentRoute: typeof AccountRoute
+    }
+    '/account/purchases': {
+      id: '/account/purchases'
+      path: '/purchases'
+      fullPath: '/account/purchases'
+      preLoaderRoute: typeof AccountPurchasesRouteImport
+      parentRoute: typeof AccountRoute
+    }
+    '/account/settings': {
+      id: '/account/settings'
+      path: '/settings'
+      fullPath: '/account/settings'
+      preLoaderRoute: typeof AccountSettingsRouteImport
+      parentRoute: typeof AccountRoute
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/analytics': {
+      id: '/admin/analytics'
+      path: '/analytics'
+      fullPath: '/admin/analytics'
+      preLoaderRoute: typeof AdminAnalyticsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/catalog': {
+      id: '/admin/catalog'
+      path: '/catalog'
+      fullPath: '/admin/catalog'
+      preLoaderRoute: typeof AdminCatalogRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/commerce': {
+      id: '/admin/commerce'
+      path: '/commerce'
+      fullPath: '/admin/commerce'
+      preLoaderRoute: typeof AdminCommerceRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/security': {
+      id: '/admin/security'
+      path: '/security'
+      fullPath: '/admin/security'
+      preLoaderRoute: typeof AdminSecurityRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/users': {
+      id: '/admin/users'
+      path: '/users'
+      fullPath: '/admin/users'
+      preLoaderRoute: typeof AdminUsersRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/_public/beat/$slug': {
+      id: '/_public/beat/$slug'
+      path: '/beat/$slug'
+      fullPath: '/beat/$slug'
+      preLoaderRoute: typeof PublicBeatSlugRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/_public/styles/': {
+      id: '/_public/styles/'
+      path: '/styles'
+      fullPath: '/styles/'
+      preLoaderRoute: typeof PublicStylesIndexRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/_public/styles/$slug': {
+      id: '/_public/styles/$slug'
+      path: '/styles/$slug'
+      fullPath: '/styles/$slug'
+      preLoaderRoute: typeof PublicStylesSlugRouteImport
+      parentRoute: typeof PublicRoute
     }
   }
 }
 
+interface PublicRouteChildren {
+  PublicBeatsRoute: typeof PublicBeatsRoute
+  PublicCartRoute: typeof PublicCartRoute
+  PublicCheckoutRoute: typeof PublicCheckoutRoute
+  PublicIndexRoute: typeof PublicIndexRoute
+  PublicBeatSlugRoute: typeof PublicBeatSlugRoute
+  PublicStylesSlugRoute: typeof PublicStylesSlugRoute
+  PublicStylesIndexRoute: typeof PublicStylesIndexRoute
+}
+
+const PublicRouteChildren: PublicRouteChildren = {
+  PublicBeatsRoute: PublicBeatsRoute,
+  PublicCartRoute: PublicCartRoute,
+  PublicCheckoutRoute: PublicCheckoutRoute,
+  PublicIndexRoute: PublicIndexRoute,
+  PublicBeatSlugRoute: PublicBeatSlugRoute,
+  PublicStylesSlugRoute: PublicStylesSlugRoute,
+  PublicStylesIndexRoute: PublicStylesIndexRoute,
+}
+
+const PublicRouteWithChildren =
+  PublicRoute._addFileChildren(PublicRouteChildren)
+
+interface AccountRouteChildren {
+  AccountDownloadsRoute: typeof AccountDownloadsRoute
+  AccountFavoritesRoute: typeof AccountFavoritesRoute
+  AccountPurchasesRoute: typeof AccountPurchasesRoute
+  AccountSettingsRoute: typeof AccountSettingsRoute
+  AccountIndexRoute: typeof AccountIndexRoute
+}
+
+const AccountRouteChildren: AccountRouteChildren = {
+  AccountDownloadsRoute: AccountDownloadsRoute,
+  AccountFavoritesRoute: AccountFavoritesRoute,
+  AccountPurchasesRoute: AccountPurchasesRoute,
+  AccountSettingsRoute: AccountSettingsRoute,
+  AccountIndexRoute: AccountIndexRoute,
+}
+
+const AccountRouteWithChildren =
+  AccountRoute._addFileChildren(AccountRouteChildren)
+
+interface AdminRouteChildren {
+  AdminAnalyticsRoute: typeof AdminAnalyticsRoute
+  AdminCatalogRoute: typeof AdminCatalogRoute
+  AdminCommerceRoute: typeof AdminCommerceRoute
+  AdminSecurityRoute: typeof AdminSecurityRoute
+  AdminUsersRoute: typeof AdminUsersRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminAnalyticsRoute: AdminAnalyticsRoute,
+  AdminCatalogRoute: AdminCatalogRoute,
+  AdminCommerceRoute: AdminCommerceRoute,
+  AdminSecurityRoute: AdminSecurityRoute,
+  AdminUsersRoute: AdminUsersRoute,
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
+  PublicRoute: PublicRouteWithChildren,
+  AccountRoute: AccountRouteWithChildren,
+  AdminRoute: AdminRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

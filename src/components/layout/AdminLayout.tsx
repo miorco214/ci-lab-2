@@ -1,0 +1,48 @@
+import { Link, Outlet, useRouterState } from "@tanstack/react-router";
+
+import { NavLink } from "@/components/layout/NavLink";
+import { adminNav, isActivePath } from "@/config/navigation";
+
+/**
+ * Espace administration: layout dédié, jamais mélangé à l'expérience publique.
+ * Aucune protection ici — l'accès sera contrôlé côté serveur (rôles +
+ * permissions) à l'étape RBAC. Masquer une route n'est pas une sécurité.
+ */
+export function AdminLayout() {
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+
+  return (
+    <div className="min-h-screen bg-background md:grid md:grid-cols-[15rem_1fr]">
+      <aside className="border-b border-sidebar-border bg-sidebar md:sticky md:top-0 md:h-screen md:border-r md:border-b-0">
+        <div className="container-page flex h-14 items-center justify-between md:px-4">
+          <Link to="/admin" className="font-display text-xs uppercase tracking-[0.24em]">
+            Chronos<span className="text-primary"> Admin</span>
+          </Link>
+          <Link to="/" className="text-xs text-muted-foreground hover:text-foreground">
+            Site
+          </Link>
+        </div>
+        <nav
+          aria-label="Navigation administration"
+          className="container-page overflow-x-auto pb-3 md:px-2"
+        >
+          <ul className="flex min-w-max gap-1 md:min-w-0 md:flex-col">
+            {adminNav.map((item) => (
+              <li key={item.to}>
+                <NavLink
+                  to={item.to}
+                  label={item.label}
+                  variant="sidebar"
+                  active={isActivePath(pathname, item)}
+                />
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </aside>
+      <main className="min-w-0">
+        <Outlet />
+      </main>
+    </div>
+  );
+}
