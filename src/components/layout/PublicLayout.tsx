@@ -29,7 +29,11 @@ function PublicHeader() {
               active={isActivePath(pathname, item)}
             />
           ))}
-          <NavLink to="/account" label="Compte" active={isActivePath(pathname, { to: "/account" })} />
+          <NavLink
+            to="/account"
+            label="Compte"
+            active={isActivePath(pathname, { to: "/account", label: "Compte" })}
+          />
         </nav>
       </div>
     </header>
