@@ -1,15 +1,16 @@
 import { Outlet, useRouterState } from "@tanstack/react-router";
 
 import { LogoLink } from "@/components/brand/Logo";
+import { AppShell } from "@/components/layout/AppShell";
+import { MobileTabBar } from "@/components/layout/PublicLayout";
 import { NavLink } from "@/components/layout/NavLink";
-import { AppShell } from "@/components/layout/PublicLayout";
 import { PageContainer } from "@/components/layout/PageContainer";
 import { accountNav, isActivePath } from "@/config/navigation";
 
 function AccountHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background/85 backdrop-blur">
-      <div className="container-page flex h-14 items-center justify-between">
+      <div className="container-page grid h-14 grid-cols-[minmax(0,1fr)_auto] items-center gap-3">
         <LogoLink size="sm" />
         <span className="text-eyebrow text-muted-foreground">Compte</span>
       </div>
@@ -19,13 +20,14 @@ function AccountHeader() {
 
 /**
  * Espace compte: structure propre, séparée du public et de l'administration.
- * Les contrôles d'accès serveur seront ajoutés à l'étape authentification.
+ * Séparation uniquement architecturale à cette étape — les contrôles d'accès
+ * réels seront appliqués côté serveur.
  */
 export function AccountLayout() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
   return (
-    <AppShell header={<AccountHeader />} footer={false}>
+    <AppShell header={<AccountHeader />} tabBar={<MobileTabBar />}>
       <PageContainer>
         <nav
           aria-label="Navigation du compte"
