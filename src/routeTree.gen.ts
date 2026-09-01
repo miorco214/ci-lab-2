@@ -22,6 +22,11 @@ import { Route as AccountFavoritesRouteImport } from './routes/account.favorites
 import { Route as AccountPurchasesRouteImport } from './routes/account.purchases'
 import { Route as AccountSettingsRouteImport } from './routes/account.settings'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as AdminAnalyticsRouteImport } from './routes/admin.analytics'
+import { Route as AdminCatalogRouteImport } from './routes/admin.catalog'
+import { Route as AdminCommerceRouteImport } from './routes/admin.commerce'
+import { Route as AdminSecurityRouteImport } from './routes/admin.security'
+import { Route as AdminUsersRouteImport } from './routes/admin.users'
 import { Route as PublicBeatSlugRouteImport } from './routes/_public.beat.$slug'
 import { Route as PublicStylesIndexRouteImport } from './routes/_public.styles.index'
 import { Route as PublicStylesSlugRouteImport } from './routes/_public.styles.$slug'
@@ -90,6 +95,31 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminAnalyticsRoute = AdminAnalyticsRouteImport.update({
+  id: '/analytics',
+  path: '/analytics',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminCatalogRoute = AdminCatalogRouteImport.update({
+  id: '/catalog',
+  path: '/catalog',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminCommerceRoute = AdminCommerceRouteImport.update({
+  id: '/commerce',
+  path: '/commerce',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminSecurityRoute = AdminSecurityRouteImport.update({
+  id: '/security',
+  path: '/security',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminUsersRoute = AdminUsersRouteImport.update({
+  id: '/users',
+  path: '/users',
+  getParentRoute: () => AdminRoute,
+} as any)
 const PublicBeatSlugRoute = PublicBeatSlugRouteImport.update({
   id: '/beat/$slug',
   path: '/beat/$slug',
@@ -117,6 +147,11 @@ export interface FileRoutesByFullPath {
   '/account/favorites': typeof AccountFavoritesRoute
   '/account/purchases': typeof AccountPurchasesRoute
   '/account/settings': typeof AccountSettingsRoute
+  '/admin/analytics': typeof AdminAnalyticsRoute
+  '/admin/catalog': typeof AdminCatalogRoute
+  '/admin/commerce': typeof AdminCommerceRoute
+  '/admin/security': typeof AdminSecurityRoute
+  '/admin/users': typeof AdminUsersRoute
   '/account/': typeof AccountIndexRoute
   '/admin/': typeof AdminIndexRoute
   '/beat/$slug': typeof PublicBeatSlugRoute
@@ -131,6 +166,11 @@ export interface FileRoutesByTo {
   '/account/favorites': typeof AccountFavoritesRoute
   '/account/purchases': typeof AccountPurchasesRoute
   '/account/settings': typeof AccountSettingsRoute
+  '/admin/analytics': typeof AdminAnalyticsRoute
+  '/admin/catalog': typeof AdminCatalogRoute
+  '/admin/commerce': typeof AdminCommerceRoute
+  '/admin/security': typeof AdminSecurityRoute
+  '/admin/users': typeof AdminUsersRoute
   '/': typeof PublicIndexRoute
   '/account': typeof AccountIndexRoute
   '/admin': typeof AdminIndexRoute
@@ -150,6 +190,11 @@ export interface FileRoutesById {
   '/account/favorites': typeof AccountFavoritesRoute
   '/account/purchases': typeof AccountPurchasesRoute
   '/account/settings': typeof AccountSettingsRoute
+  '/admin/analytics': typeof AdminAnalyticsRoute
+  '/admin/catalog': typeof AdminCatalogRoute
+  '/admin/commerce': typeof AdminCommerceRoute
+  '/admin/security': typeof AdminSecurityRoute
+  '/admin/users': typeof AdminUsersRoute
   '/_public/': typeof PublicIndexRoute
   '/account/': typeof AccountIndexRoute
   '/admin/': typeof AdminIndexRoute
@@ -170,6 +215,11 @@ export interface FileRouteTypes {
     | '/account/favorites'
     | '/account/purchases'
     | '/account/settings'
+    | '/admin/analytics'
+    | '/admin/catalog'
+    | '/admin/commerce'
+    | '/admin/security'
+    | '/admin/users'
     | '/account/'
     | '/admin/'
     | '/beat/$slug'
@@ -184,6 +234,11 @@ export interface FileRouteTypes {
     | '/account/favorites'
     | '/account/purchases'
     | '/account/settings'
+    | '/admin/analytics'
+    | '/admin/catalog'
+    | '/admin/commerce'
+    | '/admin/security'
+    | '/admin/users'
     | '/'
     | '/account'
     | '/admin'
@@ -202,6 +257,11 @@ export interface FileRouteTypes {
     | '/account/favorites'
     | '/account/purchases'
     | '/account/settings'
+    | '/admin/analytics'
+    | '/admin/catalog'
+    | '/admin/commerce'
+    | '/admin/security'
+    | '/admin/users'
     | '/_public/'
     | '/account/'
     | '/admin/'
@@ -309,6 +369,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/analytics': {
+      id: '/admin/analytics'
+      path: '/analytics'
+      fullPath: '/admin/analytics'
+      preLoaderRoute: typeof AdminAnalyticsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/catalog': {
+      id: '/admin/catalog'
+      path: '/catalog'
+      fullPath: '/admin/catalog'
+      preLoaderRoute: typeof AdminCatalogRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/commerce': {
+      id: '/admin/commerce'
+      path: '/commerce'
+      fullPath: '/admin/commerce'
+      preLoaderRoute: typeof AdminCommerceRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/security': {
+      id: '/admin/security'
+      path: '/security'
+      fullPath: '/admin/security'
+      preLoaderRoute: typeof AdminSecurityRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/users': {
+      id: '/admin/users'
+      path: '/users'
+      fullPath: '/admin/users'
+      preLoaderRoute: typeof AdminUsersRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/_public/beat/$slug': {
       id: '/_public/beat/$slug'
       path: '/beat/$slug'
@@ -376,10 +471,20 @@ const AccountRouteWithChildren =
   AccountRoute._addFileChildren(AccountRouteChildren)
 
 interface AdminRouteChildren {
+  AdminAnalyticsRoute: typeof AdminAnalyticsRoute
+  AdminCatalogRoute: typeof AdminCatalogRoute
+  AdminCommerceRoute: typeof AdminCommerceRoute
+  AdminSecurityRoute: typeof AdminSecurityRoute
+  AdminUsersRoute: typeof AdminUsersRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
+  AdminAnalyticsRoute: AdminAnalyticsRoute,
+  AdminCatalogRoute: AdminCatalogRoute,
+  AdminCommerceRoute: AdminCommerceRoute,
+  AdminSecurityRoute: AdminSecurityRoute,
+  AdminUsersRoute: AdminUsersRoute,
   AdminIndexRoute: AdminIndexRoute,
 }
 
