@@ -26,7 +26,7 @@ function PublicHeader() {
               key={item.to}
               to={item.to}
               label={item.label}
-              active={isActivePath(pathname, item)}
+              active={isActivePath(pathname, item, publicNav)}
             />
           ))}
         </nav>
@@ -80,7 +80,7 @@ export function MobileTabBar() {
               label={item.label}
               {...(item.icon ? { icon: item.icon } : {})}
               variant="stacked"
-              active={isActivePath(pathname, item)}
+              active={isActivePath(pathname, item, primaryTabs)}
             />
           </li>
         ))}

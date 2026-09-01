@@ -21,8 +21,8 @@ const chipVariants = cva(
         false: "border-border text-muted-foreground hover:border-border-strong hover:text-foreground",
       },
       size: {
-        sm: "h-8 px-3",
-        md: "h-10 px-4",
+        sm: "h-10 px-4",
+        md: "h-11 px-5",
       },
     },
     defaultVariants: { selected: false, size: "md" },
@@ -58,7 +58,7 @@ export const Chip = React.forwardRef<HTMLButtonElement, ChipProps>(
           type="button"
           onClick={onRemove}
           aria-label={`Retirer le filtre ${label}`}
-          className="mr-1 inline-flex size-8 items-center justify-center rounded-full text-muted-foreground transition-control hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+          className="mr-1 inline-flex size-9 items-center justify-center rounded-full text-muted-foreground transition-control hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
         >
           <Icon name="close" size="sm" />
         </button>
