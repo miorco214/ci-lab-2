@@ -13,6 +13,16 @@ import { cn } from "@/lib/utils";
  * mini-player coexistent ici, avec l'espace réservé sous le contenu calculé
  * une seule fois (safe areas incluses).
  */
+function bottomSpacing(hasTabBar: boolean, hasPlayer: boolean): string {
+  if (hasTabBar && hasPlayer)
+    return "pb-[calc(var(--spacing-tabbar)+var(--spacing-miniplayer)+env(safe-area-inset-bottom))] md:pb-[calc(var(--spacing-miniplayer)+1rem)]";
+  if (hasTabBar)
+    return "pb-[calc(var(--spacing-tabbar)+env(safe-area-inset-bottom))] md:pb-0";
+  if (hasPlayer)
+    return "pb-[calc(var(--spacing-miniplayer)+env(safe-area-inset-bottom))]";
+  return "";
+}
+
 export function AppShell({
   children,
   header,
@@ -27,22 +37,12 @@ export function AppShell({
   className?: string;
 }) {
   const { track } = usePlayer();
-  const hasPlayer = Boolean(track);
 
   return (
     <div className={cn("flex min-h-screen flex-col bg-background", className)}>
       <RouteProgress />
       {header}
-      <main
-        className="flex-1"
-        style={{
-          paddingBottom: [
-            tabBar ? "var(--spacing-tabbar)" : "0px",
-            hasPlayer ? "var(--spacing-miniplayer)" : "0px",
-            "env(safe-area-inset-bottom)",
-          ].join(" + ") as unknown as string,
-        }}
-      >
+      <main className={cn("flex-1", bottomSpacing(Boolean(tabBar), Boolean(track)))}>
         {children}
       </main>
       {footer}
