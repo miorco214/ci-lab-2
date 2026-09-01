@@ -4,27 +4,31 @@
  * navigation desktop, sans duplication de layout.
  */
 
+import type { IconName } from "@/lib/icons";
+
 export type NavItem = {
   /** Chemin typé par TanStack Router. */
   to: string;
   label: string;
   /** Correspondance de préfixe pour l'état actif. */
   match?: string;
+  /** Icône du registre CHRONOS (navigation mobile). */
+  icon?: IconName;
 };
 
 /** Bottom bar mobile — exactement 4 onglets. */
 export const primaryTabs: NavItem[] = [
-  { to: "/", label: "Accueil" },
-  { to: "/beats", label: "Beats" },
-  { to: "/account", label: "Bibliothèque", match: "/account" },
-  { to: "/account/settings", label: "Profil" },
+  { to: "/", label: "Accueil", icon: "home" },
+  { to: "/beats", label: "Beats", icon: "beats" },
+  { to: "/account", label: "Bibliothèque", match: "/account", icon: "library" },
+  { to: "/account/settings", label: "Profil", icon: "profile" },
 ];
 
 /** Navigation desktop publique. */
 export const publicNav: NavItem[] = [
-  { to: "/beats", label: "Beats" },
-  { to: "/styles", label: "Styles", match: "/styles" },
-  { to: "/cart", label: "Panier" },
+  { to: "/beats", label: "Beats", icon: "beats" },
+  { to: "/styles", label: "Styles", match: "/styles", icon: "styles" },
+  { to: "/cart", label: "Panier", icon: "cart" },
 ];
 
 /** Navigation de l'espace compte. */
