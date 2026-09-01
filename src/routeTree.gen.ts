@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as PublicRouteImport } from './routes/_public'
 import { Route as AccountRouteImport } from './routes/account'
 import { Route as AdminRouteImport } from './routes/admin'
+import { Route as PanierRouteImport } from './routes/panier'
 import { Route as PublicIndexRouteImport } from './routes/_public.index'
 import { Route as PublicBeatsRouteImport } from './routes/_public.beats'
 import { Route as PublicCartRouteImport } from './routes/_public.cart'
@@ -46,6 +47,11 @@ const AccountRoute = AccountRouteImport.update({
 const AdminRoute = AdminRouteImport.update({
   id: '/admin',
   path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PanierRoute = PanierRouteImport.update({
+  id: '/panier',
+  path: '/panier',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PublicIndexRoute = PublicIndexRouteImport.update({
@@ -158,6 +164,7 @@ export interface FileRoutesByFullPath {
   '/': typeof PublicIndexRoute
   '/account': typeof AccountRouteWithChildren
   '/admin': typeof AdminRouteWithChildren
+  '/panier': typeof PanierRoute
   '/beats': typeof PublicBeatsRouteWithChildren
   '/cart': typeof PublicCartRoute
   '/checkout': typeof PublicCheckoutRoute
@@ -180,6 +187,7 @@ export interface FileRoutesByFullPath {
   '/styles/': typeof PublicStylesIndexRoute
 }
 export interface FileRoutesByTo {
+  '/panier': typeof PanierRoute
   '/cart': typeof PublicCartRoute
   '/checkout': typeof PublicCheckoutRoute
   '/design-system': typeof PublicDesignSystemRoute
@@ -206,6 +214,7 @@ export interface FileRoutesById {
   '/_public': typeof PublicRouteWithChildren
   '/account': typeof AccountRouteWithChildren
   '/admin': typeof AdminRouteWithChildren
+  '/panier': typeof PanierRoute
   '/_public/beats': typeof PublicBeatsRouteWithChildren
   '/_public/cart': typeof PublicCartRoute
   '/_public/checkout': typeof PublicCheckoutRoute
@@ -234,6 +243,7 @@ export interface FileRouteTypes {
     | '/'
     | '/account'
     | '/admin'
+    | '/panier'
     | '/beats'
     | '/cart'
     | '/checkout'
@@ -256,6 +266,7 @@ export interface FileRouteTypes {
     | '/styles/'
   fileRoutesByTo: FileRoutesByTo
   to:
+    | '/panier'
     | '/cart'
     | '/checkout'
     | '/design-system'
@@ -281,6 +292,7 @@ export interface FileRouteTypes {
     | '/_public'
     | '/account'
     | '/admin'
+    | '/panier'
     | '/_public/beats'
     | '/_public/cart'
     | '/_public/checkout'
@@ -308,6 +320,7 @@ export interface RootRouteChildren {
   PublicRoute: typeof PublicRouteWithChildren
   AccountRoute: typeof AccountRouteWithChildren
   AdminRoute: typeof AdminRouteWithChildren
+  PanierRoute: typeof PanierRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -331,6 +344,13 @@ declare module '@tanstack/react-router' {
       path: '/admin'
       fullPath: '/admin'
       preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/panier': {
+      id: '/panier'
+      path: '/panier'
+      fullPath: '/panier'
+      preLoaderRoute: typeof PanierRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_public/': {
@@ -565,6 +585,7 @@ const rootRouteChildren: RootRouteChildren = {
   PublicRoute: PublicRouteWithChildren,
   AccountRoute: AccountRouteWithChildren,
   AdminRoute: AdminRouteWithChildren,
+  PanierRoute: PanierRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
