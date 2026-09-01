@@ -33,21 +33,21 @@ export const publicNav: NavItem[] = [
 
 /** Navigation de l'espace compte. */
 export const accountNav: NavItem[] = [
-  { to: "/account", label: "Vue d'ensemble" },
-  { to: "/account/purchases", label: "Achats" },
-  { to: "/account/downloads", label: "Téléchargements" },
-  { to: "/account/favorites", label: "Favoris" },
-  { to: "/account/settings", label: "Paramètres" },
+  { to: "/account", label: "Vue d'ensemble", icon: "library" },
+  { to: "/account/purchases", label: "Achats", icon: "license" },
+  { to: "/account/downloads", label: "Téléchargements", icon: "download" },
+  { to: "/account/favorites", label: "Favoris", icon: "like" },
+  { to: "/account/settings", label: "Paramètres", icon: "settings" },
 ];
 
 /** Navigation de l'espace administration (strictement séparée du public). */
 export const adminNav: NavItem[] = [
-  { to: "/admin", label: "Command Center" },
-  { to: "/admin/catalog", label: "Catalogue" },
-  { to: "/admin/commerce", label: "Commerce" },
-  { to: "/admin/users", label: "Utilisateurs" },
-  { to: "/admin/analytics", label: "Analytics" },
-  { to: "/admin/security", label: "Sécurité" },
+  { to: "/admin", label: "Command Center", icon: "waveform" },
+  { to: "/admin/catalog", label: "Catalogue", icon: "beats" },
+  { to: "/admin/commerce", label: "Commerce", icon: "cart" },
+  { to: "/admin/users", label: "Utilisateurs", icon: "profile" },
+  { to: "/admin/analytics", label: "Analytics", icon: "analytics" },
+  { to: "/admin/security", label: "Sécurité", icon: "security" },
 ];
 
 export function isActivePath(pathname: string, item: NavItem): boolean {
