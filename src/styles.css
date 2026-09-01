@@ -98,6 +98,8 @@
   --spacing-section-lg: 6rem;
   --spacing-tabbar: 4.5rem;
   --spacing-header: 3.5rem;
+  /* Hauteur réservée au mini-player global lorsqu'il est actif. */
+  --spacing-miniplayer: 4rem;
 
   /* -------------------------------------------------------- Conteneurs */
   --container-content: 44rem;
@@ -142,6 +144,16 @@
       opacity: 1;
     }
   }
+  /* Indicateur de navigation: discret, jamais bloquant. */
+  @keyframes route-progress {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(300%);
+    }
+  }
+
 }
 
 :root {

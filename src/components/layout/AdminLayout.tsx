@@ -2,10 +2,12 @@ import { Link, Outlet, useRouterState } from "@tanstack/react-router";
 
 import { LogoLink } from "@/components/brand/Logo";
 import { NavLink } from "@/components/layout/NavLink";
+import { RouteProgress } from "@/components/layout/RouteProgress";
 import { adminNav, isActivePath } from "@/config/navigation";
 
 /**
- * Espace administration: layout dédié, jamais mélangé à l'expérience publique.
+ * Espace administration: layout dédié, jamais mélangé à l'expérience publique
+ * (ni bottom bar visiteur, ni mini-player).
  * Aucune protection ici — l'accès sera contrôlé côté serveur (rôles +
  * permissions) à l'étape RBAC. Masquer une route n'est pas une sécurité.
  */
@@ -14,8 +16,9 @@ export function AdminLayout() {
 
   return (
     <div className="min-h-screen bg-background md:grid md:grid-cols-[15rem_1fr]">
+      <RouteProgress />
       <aside className="border-b border-sidebar-border bg-sidebar md:sticky md:top-0 md:h-screen md:border-r md:border-b-0">
-        <div className="container-page flex h-14 items-center justify-between md:px-4">
+        <div className="container-page grid h-14 grid-cols-[minmax(0,1fr)_auto] items-center gap-3 md:px-4">
           <LogoLink to="/admin" size="sm" />
           <Link to="/" className="text-meta text-muted-foreground transition-control hover:text-foreground">
             Site
@@ -40,7 +43,7 @@ export function AdminLayout() {
           </ul>
         </nav>
       </aside>
-      <main className="min-w-0">
+      <main className="min-w-0 pb-[env(safe-area-inset-bottom)]">
         <Outlet />
       </main>
     </div>

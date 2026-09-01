@@ -19,16 +19,15 @@ export type NavItem = {
 /** Bottom bar mobile — exactement 4 onglets. */
 export const primaryTabs: NavItem[] = [
   { to: "/", label: "Accueil", icon: "home" },
-  { to: "/beats", label: "Beats", icon: "beats" },
+  { to: "/beats", label: "Beats", match: "/beats", icon: "beats" },
   { to: "/account", label: "Bibliothèque", match: "/account", icon: "library" },
   { to: "/account/settings", label: "Profil", icon: "profile" },
 ];
 
 /** Navigation desktop publique. */
 export const publicNav: NavItem[] = [
-  { to: "/beats", label: "Beats", icon: "beats" },
+  { to: "/beats", label: "Beats", match: "/beats", icon: "beats" },
   { to: "/styles", label: "Styles", match: "/styles", icon: "styles" },
-  { to: "/cart", label: "Panier", icon: "cart" },
 ];
 
 /** Navigation de l'espace compte. */
@@ -48,6 +47,7 @@ export const adminNav: NavItem[] = [
   { to: "/admin/users", label: "Utilisateurs", icon: "profile" },
   { to: "/admin/analytics", label: "Analytics", icon: "analytics" },
   { to: "/admin/security", label: "Sécurité", icon: "security" },
+  { to: "/admin/settings", label: "Paramètres", icon: "settings" },
 ];
 
 export function isActivePath(pathname: string, item: NavItem): boolean {

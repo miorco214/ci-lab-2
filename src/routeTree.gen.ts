@@ -12,6 +12,8 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as PublicRouteImport } from './routes/_public'
 import { Route as AccountRouteImport } from './routes/account'
 import { Route as AdminRouteImport } from './routes/admin'
+import { Route as CompteRouteImport } from './routes/compte'
+import { Route as PanierRouteImport } from './routes/panier'
 import { Route as PublicIndexRouteImport } from './routes/_public.index'
 import { Route as PublicBeatsRouteImport } from './routes/_public.beats'
 import { Route as PublicCartRouteImport } from './routes/_public.cart'
@@ -27,8 +29,11 @@ import { Route as AdminAnalyticsRouteImport } from './routes/admin.analytics'
 import { Route as AdminCatalogRouteImport } from './routes/admin.catalog'
 import { Route as AdminCommerceRouteImport } from './routes/admin.commerce'
 import { Route as AdminSecurityRouteImport } from './routes/admin.security'
+import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
 import { Route as AdminUsersRouteImport } from './routes/admin.users'
 import { Route as PublicBeatSlugRouteImport } from './routes/_public.beat.$slug'
+import { Route as PublicBeatsIndexRouteImport } from './routes/_public.beats.index'
+import { Route as PublicBeatsGenreRouteImport } from './routes/_public.beats.$genre'
 import { Route as PublicStylesIndexRouteImport } from './routes/_public.styles.index'
 import { Route as PublicStylesSlugRouteImport } from './routes/_public.styles.$slug'
 
@@ -44,6 +49,16 @@ const AccountRoute = AccountRouteImport.update({
 const AdminRoute = AdminRouteImport.update({
   id: '/admin',
   path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CompteRoute = CompteRouteImport.update({
+  id: '/compte',
+  path: '/compte',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PanierRoute = PanierRouteImport.update({
+  id: '/panier',
+  path: '/panier',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PublicIndexRoute = PublicIndexRouteImport.update({
@@ -121,6 +136,11 @@ const AdminSecurityRoute = AdminSecurityRouteImport.update({
   path: '/security',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminSettingsRoute = AdminSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminUsersRoute = AdminUsersRouteImport.update({
   id: '/users',
   path: '/users',
@@ -130,6 +150,16 @@ const PublicBeatSlugRoute = PublicBeatSlugRouteImport.update({
   id: '/beat/$slug',
   path: '/beat/$slug',
   getParentRoute: () => PublicRoute,
+} as any)
+const PublicBeatsIndexRoute = PublicBeatsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => PublicBeatsRoute,
+} as any)
+const PublicBeatsGenreRoute = PublicBeatsGenreRouteImport.update({
+  id: '/$genre',
+  path: '/$genre',
+  getParentRoute: () => PublicBeatsRoute,
 } as any)
 const PublicStylesIndexRoute = PublicStylesIndexRouteImport.update({
   id: '/styles/',
@@ -146,7 +176,9 @@ export interface FileRoutesByFullPath {
   '/': typeof PublicIndexRoute
   '/account': typeof AccountRouteWithChildren
   '/admin': typeof AdminRouteWithChildren
-  '/beats': typeof PublicBeatsRoute
+  '/compte': typeof CompteRoute
+  '/panier': typeof PanierRoute
+  '/beats': typeof PublicBeatsRouteWithChildren
   '/cart': typeof PublicCartRoute
   '/checkout': typeof PublicCheckoutRoute
   '/design-system': typeof PublicDesignSystemRoute
@@ -158,15 +190,19 @@ export interface FileRoutesByFullPath {
   '/admin/catalog': typeof AdminCatalogRoute
   '/admin/commerce': typeof AdminCommerceRoute
   '/admin/security': typeof AdminSecurityRoute
+  '/admin/settings': typeof AdminSettingsRoute
   '/admin/users': typeof AdminUsersRoute
   '/account/': typeof AccountIndexRoute
   '/admin/': typeof AdminIndexRoute
   '/beat/$slug': typeof PublicBeatSlugRoute
+  '/beats/$genre': typeof PublicBeatsGenreRoute
   '/styles/$slug': typeof PublicStylesSlugRoute
+  '/beats/': typeof PublicBeatsIndexRoute
   '/styles/': typeof PublicStylesIndexRoute
 }
 export interface FileRoutesByTo {
-  '/beats': typeof PublicBeatsRoute
+  '/compte': typeof CompteRoute
+  '/panier': typeof PanierRoute
   '/cart': typeof PublicCartRoute
   '/checkout': typeof PublicCheckoutRoute
   '/design-system': typeof PublicDesignSystemRoute
@@ -178,12 +214,15 @@ export interface FileRoutesByTo {
   '/admin/catalog': typeof AdminCatalogRoute
   '/admin/commerce': typeof AdminCommerceRoute
   '/admin/security': typeof AdminSecurityRoute
+  '/admin/settings': typeof AdminSettingsRoute
   '/admin/users': typeof AdminUsersRoute
   '/': typeof PublicIndexRoute
   '/account': typeof AccountIndexRoute
   '/admin': typeof AdminIndexRoute
   '/beat/$slug': typeof PublicBeatSlugRoute
+  '/beats/$genre': typeof PublicBeatsGenreRoute
   '/styles/$slug': typeof PublicStylesSlugRoute
+  '/beats': typeof PublicBeatsIndexRoute
   '/styles': typeof PublicStylesIndexRoute
 }
 export interface FileRoutesById {
@@ -191,7 +230,9 @@ export interface FileRoutesById {
   '/_public': typeof PublicRouteWithChildren
   '/account': typeof AccountRouteWithChildren
   '/admin': typeof AdminRouteWithChildren
-  '/_public/beats': typeof PublicBeatsRoute
+  '/compte': typeof CompteRoute
+  '/panier': typeof PanierRoute
+  '/_public/beats': typeof PublicBeatsRouteWithChildren
   '/_public/cart': typeof PublicCartRoute
   '/_public/checkout': typeof PublicCheckoutRoute
   '/_public/design-system': typeof PublicDesignSystemRoute
@@ -203,12 +244,15 @@ export interface FileRoutesById {
   '/admin/catalog': typeof AdminCatalogRoute
   '/admin/commerce': typeof AdminCommerceRoute
   '/admin/security': typeof AdminSecurityRoute
+  '/admin/settings': typeof AdminSettingsRoute
   '/admin/users': typeof AdminUsersRoute
   '/_public/': typeof PublicIndexRoute
   '/account/': typeof AccountIndexRoute
   '/admin/': typeof AdminIndexRoute
   '/_public/beat/$slug': typeof PublicBeatSlugRoute
+  '/_public/beats/$genre': typeof PublicBeatsGenreRoute
   '/_public/styles/$slug': typeof PublicStylesSlugRoute
+  '/_public/beats/': typeof PublicBeatsIndexRoute
   '/_public/styles/': typeof PublicStylesIndexRoute
 }
 export interface FileRouteTypes {
@@ -217,6 +261,8 @@ export interface FileRouteTypes {
     | '/'
     | '/account'
     | '/admin'
+    | '/compte'
+    | '/panier'
     | '/beats'
     | '/cart'
     | '/checkout'
@@ -229,15 +275,19 @@ export interface FileRouteTypes {
     | '/admin/catalog'
     | '/admin/commerce'
     | '/admin/security'
+    | '/admin/settings'
     | '/admin/users'
     | '/account/'
     | '/admin/'
     | '/beat/$slug'
+    | '/beats/$genre'
     | '/styles/$slug'
+    | '/beats/'
     | '/styles/'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/beats'
+    | '/compte'
+    | '/panier'
     | '/cart'
     | '/checkout'
     | '/design-system'
@@ -249,18 +299,23 @@ export interface FileRouteTypes {
     | '/admin/catalog'
     | '/admin/commerce'
     | '/admin/security'
+    | '/admin/settings'
     | '/admin/users'
     | '/'
     | '/account'
     | '/admin'
     | '/beat/$slug'
+    | '/beats/$genre'
     | '/styles/$slug'
+    | '/beats'
     | '/styles'
   id:
     | '__root__'
     | '/_public'
     | '/account'
     | '/admin'
+    | '/compte'
+    | '/panier'
     | '/_public/beats'
     | '/_public/cart'
     | '/_public/checkout'
@@ -273,12 +328,15 @@ export interface FileRouteTypes {
     | '/admin/catalog'
     | '/admin/commerce'
     | '/admin/security'
+    | '/admin/settings'
     | '/admin/users'
     | '/_public/'
     | '/account/'
     | '/admin/'
     | '/_public/beat/$slug'
+    | '/_public/beats/$genre'
     | '/_public/styles/$slug'
+    | '/_public/beats/'
     | '/_public/styles/'
   fileRoutesById: FileRoutesById
 }
@@ -286,6 +344,8 @@ export interface RootRouteChildren {
   PublicRoute: typeof PublicRouteWithChildren
   AccountRoute: typeof AccountRouteWithChildren
   AdminRoute: typeof AdminRouteWithChildren
+  CompteRoute: typeof CompteRoute
+  PanierRoute: typeof PanierRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -309,6 +369,20 @@ declare module '@tanstack/react-router' {
       path: '/admin'
       fullPath: '/admin'
       preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/compte': {
+      id: '/compte'
+      path: '/compte'
+      fullPath: '/compte'
+      preLoaderRoute: typeof CompteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/panier': {
+      id: '/panier'
+      path: '/panier'
+      fullPath: '/panier'
+      preLoaderRoute: typeof PanierRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_public/': {
@@ -416,6 +490,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminSecurityRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/settings': {
+      id: '/admin/settings'
+      path: '/settings'
+      fullPath: '/admin/settings'
+      preLoaderRoute: typeof AdminSettingsRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/users': {
       id: '/admin/users'
       path: '/users'
@@ -429,6 +510,20 @@ declare module '@tanstack/react-router' {
       fullPath: '/beat/$slug'
       preLoaderRoute: typeof PublicBeatSlugRouteImport
       parentRoute: typeof PublicRoute
+    }
+    '/_public/beats/': {
+      id: '/_public/beats/'
+      path: '/'
+      fullPath: '/beats/'
+      preLoaderRoute: typeof PublicBeatsIndexRouteImport
+      parentRoute: typeof PublicBeatsRoute
+    }
+    '/_public/beats/$genre': {
+      id: '/_public/beats/$genre'
+      path: '/$genre'
+      fullPath: '/beats/$genre'
+      preLoaderRoute: typeof PublicBeatsGenreRouteImport
+      parentRoute: typeof PublicBeatsRoute
     }
     '/_public/styles/': {
       id: '/_public/styles/'
@@ -447,8 +542,22 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface PublicBeatsRouteChildren {
+  PublicBeatsGenreRoute: typeof PublicBeatsGenreRoute
+  PublicBeatsIndexRoute: typeof PublicBeatsIndexRoute
+}
+
+const PublicBeatsRouteChildren: PublicBeatsRouteChildren = {
+  PublicBeatsGenreRoute: PublicBeatsGenreRoute,
+  PublicBeatsIndexRoute: PublicBeatsIndexRoute,
+}
+
+const PublicBeatsRouteWithChildren = PublicBeatsRoute._addFileChildren(
+  PublicBeatsRouteChildren,
+)
+
 interface PublicRouteChildren {
-  PublicBeatsRoute: typeof PublicBeatsRoute
+  PublicBeatsRoute: typeof PublicBeatsRouteWithChildren
   PublicCartRoute: typeof PublicCartRoute
   PublicCheckoutRoute: typeof PublicCheckoutRoute
   PublicDesignSystemRoute: typeof PublicDesignSystemRoute
@@ -459,7 +568,7 @@ interface PublicRouteChildren {
 }
 
 const PublicRouteChildren: PublicRouteChildren = {
-  PublicBeatsRoute: PublicBeatsRoute,
+  PublicBeatsRoute: PublicBeatsRouteWithChildren,
   PublicCartRoute: PublicCartRoute,
   PublicCheckoutRoute: PublicCheckoutRoute,
   PublicDesignSystemRoute: PublicDesignSystemRoute,
@@ -496,6 +605,7 @@ interface AdminRouteChildren {
   AdminCatalogRoute: typeof AdminCatalogRoute
   AdminCommerceRoute: typeof AdminCommerceRoute
   AdminSecurityRoute: typeof AdminSecurityRoute
+  AdminSettingsRoute: typeof AdminSettingsRoute
   AdminUsersRoute: typeof AdminUsersRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
@@ -505,6 +615,7 @@ const AdminRouteChildren: AdminRouteChildren = {
   AdminCatalogRoute: AdminCatalogRoute,
   AdminCommerceRoute: AdminCommerceRoute,
   AdminSecurityRoute: AdminSecurityRoute,
+  AdminSettingsRoute: AdminSettingsRoute,
   AdminUsersRoute: AdminUsersRoute,
   AdminIndexRoute: AdminIndexRoute,
 }
@@ -515,6 +626,8 @@ const rootRouteChildren: RootRouteChildren = {
   PublicRoute: PublicRouteWithChildren,
   AccountRoute: AccountRouteWithChildren,
   AdminRoute: AdminRouteWithChildren,
+  CompteRoute: CompteRoute,
+  PanierRoute: PanierRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
