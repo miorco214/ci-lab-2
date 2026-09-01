@@ -1,5 +1,7 @@
 import { Link } from "@tanstack/react-router";
 
+import { Icon } from "@/components/ui/icon";
+import type { IconName } from "@/lib/icons";
 import { cn } from "@/lib/utils";
 
 /**
@@ -9,11 +11,13 @@ import { cn } from "@/lib/utils";
 export function NavLink({
   to,
   label,
+  icon,
   active,
   variant = "inline",
 }: {
   to: string;
   label: string;
+  icon?: IconName;
   active?: boolean;
   variant?: "inline" | "stacked" | "sidebar";
 }) {
@@ -23,25 +27,18 @@ export function NavLink({
       to={to as any}
       aria-current={active ? "page" : undefined}
       className={cn(
-        "rounded-md text-sm transition-colors",
+        "rounded-lg text-nav transition-control",
         variant === "inline" && "px-3 py-2 text-muted-foreground hover:text-foreground",
         variant === "stacked" &&
-          "flex flex-1 flex-col items-center gap-1 px-2 py-2 text-[0.6875rem] text-muted-foreground hover:text-foreground",
+          "flex min-h-[var(--size-touch)] flex-1 flex-col items-center justify-center gap-1 px-2 py-2 text-[0.6875rem] text-muted-foreground hover:text-foreground",
         variant === "sidebar" &&
-          "block px-3 py-2 text-muted-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
+          "flex min-h-[var(--size-touch)] items-center gap-2.5 px-3 py-2 text-muted-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
         active && "text-foreground",
+        active && variant === "stacked" && "text-primary",
         active && variant === "sidebar" && "bg-sidebar-accent text-sidebar-accent-foreground",
       )}
     >
-      {variant === "stacked" ? (
-        <span
-          aria-hidden
-          className={cn(
-            "size-1.5 rounded-full",
-            active ? "bg-primary" : "bg-transparent",
-          )}
-        />
-      ) : null}
+      {icon && variant !== "inline" ? <Icon name={icon} size="md" /> : null}
       {label}
     </Link>
   );
