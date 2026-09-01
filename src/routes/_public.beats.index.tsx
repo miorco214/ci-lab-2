@@ -1,7 +1,8 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 
 import { PageContainer, PageHeader } from "@/components/layout/PageContainer";
 import { AsyncSection, EmptyState } from "@/components/states/DataState";
+import { Button } from "@/components/ui/button";
 
 const title = "Catalogue de beats — CHRONOS INSTRU LAB";
 const description =
@@ -34,6 +35,11 @@ function BeatsPage() {
           <EmptyState
             title="Catalogue vide"
             description="Aucun beat publié pour le moment. Le catalogue apparaîtra ici dès la mise en ligne des premiers instrumentaux."
+            action={
+              <Button asChild variant="secondary">
+                <Link to="/styles">Parcourir les styles</Link>
+              </Button>
+            }
           />
         }
       >
