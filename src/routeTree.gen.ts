@@ -30,6 +30,7 @@ import { Route as AdminSecurityRouteImport } from './routes/admin.security'
 import { Route as AdminUsersRouteImport } from './routes/admin.users'
 import { Route as PublicBeatSlugRouteImport } from './routes/_public.beat.$slug'
 import { Route as PublicBeatsIndexRouteImport } from './routes/_public.beats.index'
+import { Route as PublicBeatsGenreRouteImport } from './routes/_public.beats.$genre'
 import { Route as PublicStylesIndexRouteImport } from './routes/_public.styles.index'
 import { Route as PublicStylesSlugRouteImport } from './routes/_public.styles.$slug'
 
@@ -137,6 +138,11 @@ const PublicBeatsIndexRoute = PublicBeatsIndexRouteImport.update({
   path: '/',
   getParentRoute: () => PublicBeatsRoute,
 } as any)
+const PublicBeatsGenreRoute = PublicBeatsGenreRouteImport.update({
+  id: '/$genre',
+  path: '/$genre',
+  getParentRoute: () => PublicBeatsRoute,
+} as any)
 const PublicStylesIndexRoute = PublicStylesIndexRouteImport.update({
   id: '/styles/',
   path: '/styles/',
@@ -168,6 +174,7 @@ export interface FileRoutesByFullPath {
   '/account/': typeof AccountIndexRoute
   '/admin/': typeof AdminIndexRoute
   '/beat/$slug': typeof PublicBeatSlugRoute
+  '/beats/$genre': typeof PublicBeatsGenreRoute
   '/styles/$slug': typeof PublicStylesSlugRoute
   '/beats/': typeof PublicBeatsIndexRoute
   '/styles/': typeof PublicStylesIndexRoute
@@ -189,6 +196,7 @@ export interface FileRoutesByTo {
   '/account': typeof AccountIndexRoute
   '/admin': typeof AdminIndexRoute
   '/beat/$slug': typeof PublicBeatSlugRoute
+  '/beats/$genre': typeof PublicBeatsGenreRoute
   '/styles/$slug': typeof PublicStylesSlugRoute
   '/beats': typeof PublicBeatsIndexRoute
   '/styles': typeof PublicStylesIndexRoute
@@ -215,6 +223,7 @@ export interface FileRoutesById {
   '/account/': typeof AccountIndexRoute
   '/admin/': typeof AdminIndexRoute
   '/_public/beat/$slug': typeof PublicBeatSlugRoute
+  '/_public/beats/$genre': typeof PublicBeatsGenreRoute
   '/_public/styles/$slug': typeof PublicStylesSlugRoute
   '/_public/beats/': typeof PublicBeatsIndexRoute
   '/_public/styles/': typeof PublicStylesIndexRoute
@@ -241,6 +250,7 @@ export interface FileRouteTypes {
     | '/account/'
     | '/admin/'
     | '/beat/$slug'
+    | '/beats/$genre'
     | '/styles/$slug'
     | '/beats/'
     | '/styles/'
@@ -262,6 +272,7 @@ export interface FileRouteTypes {
     | '/account'
     | '/admin'
     | '/beat/$slug'
+    | '/beats/$genre'
     | '/styles/$slug'
     | '/beats'
     | '/styles'
@@ -287,6 +298,7 @@ export interface FileRouteTypes {
     | '/account/'
     | '/admin/'
     | '/_public/beat/$slug'
+    | '/_public/beats/$genre'
     | '/_public/styles/$slug'
     | '/_public/beats/'
     | '/_public/styles/'
@@ -447,6 +459,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PublicBeatsIndexRouteImport
       parentRoute: typeof PublicBeatsRoute
     }
+    '/_public/beats/$genre': {
+      id: '/_public/beats/$genre'
+      path: '/$genre'
+      fullPath: '/beats/$genre'
+      preLoaderRoute: typeof PublicBeatsGenreRouteImport
+      parentRoute: typeof PublicBeatsRoute
+    }
     '/_public/styles/': {
       id: '/_public/styles/'
       path: '/styles'
@@ -465,10 +484,12 @@ declare module '@tanstack/react-router' {
 }
 
 interface PublicBeatsRouteChildren {
+  PublicBeatsGenreRoute: typeof PublicBeatsGenreRoute
   PublicBeatsIndexRoute: typeof PublicBeatsIndexRoute
 }
 
 const PublicBeatsRouteChildren: PublicBeatsRouteChildren = {
+  PublicBeatsGenreRoute: PublicBeatsGenreRoute,
   PublicBeatsIndexRoute: PublicBeatsIndexRoute,
 }
 
