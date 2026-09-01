@@ -7,7 +7,7 @@ const title = "Catalogue de beats — CHRONOS INSTRU LAB";
 const description =
   "Le catalogue complet des instrumentaux CHRONOS : recherche, filtres compacts et tri.";
 
-export const Route = createFileRoute("/_public/beats")({
+export const Route = createFileRoute("/_public/beats/")({
   head: () => ({
     meta: [
       { title },
