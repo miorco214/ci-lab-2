@@ -1,7 +1,14 @@
 import { cn } from "@/lib/utils";
 
+/** Skeleton: préféré aux gros loaders, jamais de faux contenu textuel. */
 function Skeleton({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
-  return <div className={cn("animate-pulse rounded-md bg-primary/10", className)} {...props} />;
+  return (
+    <div
+      aria-hidden
+      className={cn("animate-pulse rounded-lg bg-secondary", className)}
+      {...props}
+    />
+  );
 }
 
 export { Skeleton };

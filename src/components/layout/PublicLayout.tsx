@@ -1,17 +1,11 @@
-import { Link, Outlet, useRouterState } from "@tanstack/react-router";
+import { Outlet, useRouterState } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 
+import { LogoLink, Logo } from "@/components/brand/Logo";
 import { NavLink } from "@/components/layout/NavLink";
 import { isActivePath, primaryTabs, publicNav } from "@/config/navigation";
 
-/** Marque CHRONOS — Clash Display réservé à l'identité. */
-function Wordmark() {
-  return (
-    <Link to="/" className="font-display text-sm uppercase tracking-[0.28em] text-foreground">
-      Chronos<span className="text-primary"> Instru Lab</span>
-    </Link>
-  );
-}
+
 
 function PublicHeader() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
@@ -19,7 +13,7 @@ function PublicHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background/85 backdrop-blur">
       <div className="container-page flex h-14 items-center justify-between gap-4">
-        <Wordmark />
+        <LogoLink size="md" />
         <nav aria-label="Navigation principale" className="hidden items-center gap-1 md:flex">
           {publicNav.map((item) => (
             <NavLink
@@ -55,6 +49,7 @@ export function MobileTabBar() {
             <NavLink
               to={item.to}
               label={item.label}
+              {...(item.icon ? { icon: item.icon } : {})}
               variant="stacked"
               active={isActivePath(pathname, item)}
             />
@@ -69,8 +64,8 @@ function PublicFooter() {
   return (
     <footer className="border-t border-border">
       <div className="container-page flex flex-col gap-2 py-8 text-xs text-muted-foreground">
-        <Wordmark />
-        <p>Maison de production digitale — instrumentaux sous licence.</p>
+        <Logo size="sm" />
+        <p className="mt-2">Maison de production digitale — instrumentaux sous licence.</p>
       </div>
     </footer>
   );
