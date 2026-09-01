@@ -16,6 +16,7 @@ import { Route as PublicIndexRouteImport } from './routes/_public.index'
 import { Route as PublicBeatsRouteImport } from './routes/_public.beats'
 import { Route as PublicCartRouteImport } from './routes/_public.cart'
 import { Route as PublicCheckoutRouteImport } from './routes/_public.checkout'
+import { Route as PublicDesignSystemRouteImport } from './routes/_public.design-system'
 import { Route as AccountIndexRouteImport } from './routes/account.index'
 import { Route as AccountDownloadsRouteImport } from './routes/account.downloads'
 import { Route as AccountFavoritesRouteImport } from './routes/account.favorites'
@@ -63,6 +64,11 @@ const PublicCartRoute = PublicCartRouteImport.update({
 const PublicCheckoutRoute = PublicCheckoutRouteImport.update({
   id: '/checkout',
   path: '/checkout',
+  getParentRoute: () => PublicRoute,
+} as any)
+const PublicDesignSystemRoute = PublicDesignSystemRouteImport.update({
+  id: '/design-system',
+  path: '/design-system',
   getParentRoute: () => PublicRoute,
 } as any)
 const AccountIndexRoute = AccountIndexRouteImport.update({
@@ -143,6 +149,7 @@ export interface FileRoutesByFullPath {
   '/beats': typeof PublicBeatsRoute
   '/cart': typeof PublicCartRoute
   '/checkout': typeof PublicCheckoutRoute
+  '/design-system': typeof PublicDesignSystemRoute
   '/account/downloads': typeof AccountDownloadsRoute
   '/account/favorites': typeof AccountFavoritesRoute
   '/account/purchases': typeof AccountPurchasesRoute
@@ -162,6 +169,7 @@ export interface FileRoutesByTo {
   '/beats': typeof PublicBeatsRoute
   '/cart': typeof PublicCartRoute
   '/checkout': typeof PublicCheckoutRoute
+  '/design-system': typeof PublicDesignSystemRoute
   '/account/downloads': typeof AccountDownloadsRoute
   '/account/favorites': typeof AccountFavoritesRoute
   '/account/purchases': typeof AccountPurchasesRoute
@@ -186,6 +194,7 @@ export interface FileRoutesById {
   '/_public/beats': typeof PublicBeatsRoute
   '/_public/cart': typeof PublicCartRoute
   '/_public/checkout': typeof PublicCheckoutRoute
+  '/_public/design-system': typeof PublicDesignSystemRoute
   '/account/downloads': typeof AccountDownloadsRoute
   '/account/favorites': typeof AccountFavoritesRoute
   '/account/purchases': typeof AccountPurchasesRoute
@@ -211,6 +220,7 @@ export interface FileRouteTypes {
     | '/beats'
     | '/cart'
     | '/checkout'
+    | '/design-system'
     | '/account/downloads'
     | '/account/favorites'
     | '/account/purchases'
@@ -230,6 +240,7 @@ export interface FileRouteTypes {
     | '/beats'
     | '/cart'
     | '/checkout'
+    | '/design-system'
     | '/account/downloads'
     | '/account/favorites'
     | '/account/purchases'
@@ -253,6 +264,7 @@ export interface FileRouteTypes {
     | '/_public/beats'
     | '/_public/cart'
     | '/_public/checkout'
+    | '/_public/design-system'
     | '/account/downloads'
     | '/account/favorites'
     | '/account/purchases'
@@ -325,6 +337,13 @@ declare module '@tanstack/react-router' {
       path: '/checkout'
       fullPath: '/checkout'
       preLoaderRoute: typeof PublicCheckoutRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/_public/design-system': {
+      id: '/_public/design-system'
+      path: '/design-system'
+      fullPath: '/design-system'
+      preLoaderRoute: typeof PublicDesignSystemRouteImport
       parentRoute: typeof PublicRoute
     }
     '/account/': {
@@ -432,6 +451,7 @@ interface PublicRouteChildren {
   PublicBeatsRoute: typeof PublicBeatsRoute
   PublicCartRoute: typeof PublicCartRoute
   PublicCheckoutRoute: typeof PublicCheckoutRoute
+  PublicDesignSystemRoute: typeof PublicDesignSystemRoute
   PublicIndexRoute: typeof PublicIndexRoute
   PublicBeatSlugRoute: typeof PublicBeatSlugRoute
   PublicStylesSlugRoute: typeof PublicStylesSlugRoute
@@ -442,6 +462,7 @@ const PublicRouteChildren: PublicRouteChildren = {
   PublicBeatsRoute: PublicBeatsRoute,
   PublicCartRoute: PublicCartRoute,
   PublicCheckoutRoute: PublicCheckoutRoute,
+  PublicDesignSystemRoute: PublicDesignSystemRoute,
   PublicIndexRoute: PublicIndexRoute,
   PublicBeatSlugRoute: PublicBeatSlugRoute,
   PublicStylesSlugRoute: PublicStylesSlugRoute,
