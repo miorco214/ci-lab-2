@@ -20,9 +20,9 @@ function formatTime(seconds: number): string {
  * bottom bar (jamais par-dessus) et respecte les safe areas.
  */
 export function MiniPlayer({ withTabBar = false }: { withTabBar?: boolean }) {
-  let { track } = usePlayer(); const { isPlaying, positionSeconds, durationSeconds, toggle, close } = usePlayer();
+  const { track, isPlaying, positionSeconds, durationSeconds, toggle, close } = usePlayer();
 
-  if (!track) { track = { slug: "test", title: "Test" }; }
+  if (!track) return null;
 
   const progress =
     durationSeconds > 0 ? Math.min(100, (positionSeconds / durationSeconds) * 100) : 0;
