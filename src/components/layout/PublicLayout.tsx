@@ -49,6 +49,7 @@ export function MobileTabBar() {
             <NavLink
               to={item.to}
               label={item.label}
+              {...(item.icon ? { icon: item.icon } : {})}
               variant="stacked"
               active={isActivePath(pathname, item)}
             />
