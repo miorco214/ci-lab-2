@@ -34,7 +34,13 @@ export function AccountLayout() {
           <ul className="flex min-w-max gap-1 border-b border-border pb-2">
             {accountNav.map((item) => (
               <li key={item.to}>
-                <NavLink to={item.to} label={item.label} active={isActivePath(pathname, item)} />
+                <NavLink
+                  to={item.to}
+                  label={item.label}
+                  {...(item.icon ? { icon: item.icon } : {})}
+                  variant="sidebar"
+                  active={isActivePath(pathname, item)}
+                />
               </li>
             ))}
           </ul>

@@ -31,6 +31,7 @@ export function AdminLayout() {
                 <NavLink
                   to={item.to}
                   label={item.label}
+                  {...(item.icon ? { icon: item.icon } : {})}
                   variant="sidebar"
                   active={isActivePath(pathname, item)}
                 />
