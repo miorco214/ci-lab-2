@@ -63,16 +63,38 @@ le sujet est sensible, ambigu ou insuffisamment couvert par une fiche.
 - `privacy.md` — minimisation, collecte, conservation, droits.
 - `data-residency.md` — résidence vs souveraineté des données.
 
-## Reviewers
+## Reviewers — quand lancer quoi
 
-`.knowledge/reviewers/` contient 18 fiches de reviewers (voir le tableau dans
-`AGENTS.md`). Chaque fiche indique son domaine, son périmètre d'inspection, ce
-qu'il ne doit pas modifier, les fiches à consulter, les défauts prioritaires et
-le format de rapport (sévérité / emplacement / problème / preuve / impact /
-correction recommandée).
+`.knowledge/reviewers/` contient 18 fiches. Chacune indique son domaine, son
+périmètre d'inspection, ce qu'il ne doit pas modifier, les fiches à consulter,
+les défauts prioritaires et le format de rapport (sévérité / emplacement /
+problème / preuve / impact / correction recommandée).
+
+| Fiche | Lancer après une modification touchant… |
+|---|---|
+| `reviewers/cipher.md` | clés, variables d'environnement, config, intégrations |
+| `reviewers/warden.md` | route ou fonction serveur, API, autorisation |
+| `reviewers/sentinel.md` | authentification, sessions, zones protégées |
+| `reviewers/aegis.md` | toute fonctionnalité sensible (revue sécurité globale) |
+| `reviewers/vault.md` | schéma, migration, politique RLS, requêtes |
+| `reviewers/throttle.md` | endpoint sensible ou coûteux |
+| `reviewers/atlas.md` | logique métier, états, asynchrone |
+| `reviewers/iris.md` | UI, formulaires, responsive, design system |
+| `reviewers/vertex.md` | rendu, chargement, médias, SEO |
+| `reviewers/forge.md` | structure du projet, refactor, nouveaux modules |
+| `reviewers/ledger.md` | commandes, licences, prix, paiements |
+| `reviewers/courier.md` | storage, upload, téléchargement de fichiers |
+| `reviewers/trace.md` | analytics, événements, métriques affichées |
+| `reviewers/scribe.md` | erreurs, logging, audit trail |
+| `reviewers/prism.md` | données personnelles, collecte, conservation |
+| `reviewers/echo.md` | audio, player, prévisualisation |
+| `reviewers/l10n.md` | textes d'interface, traductions, formats |
+| `reviewers/guardian.md` | toujours, en revue finale transversale |
 
 ## Sources
 
-`.knowledge/sources/` — documents originaux, non modifiés :
+`.knowledge/sources/` — documents originaux, non modifiés, référence complète du
+projet (voir `.knowledge/sources/README.md`) :
 `The_foundation.docx`, `The_mastery.docx`, `The_industry.docx`,
 `The_Vault.docx`, `The_Pit.docx`.
+
