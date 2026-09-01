@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as PublicRouteImport } from './routes/_public'
 import { Route as AccountRouteImport } from './routes/account'
 import { Route as AdminRouteImport } from './routes/admin'
+import { Route as CompteRouteImport } from './routes/compte'
 import { Route as PanierRouteImport } from './routes/panier'
 import { Route as PublicIndexRouteImport } from './routes/_public.index'
 import { Route as PublicBeatsRouteImport } from './routes/_public.beats'
@@ -47,6 +48,11 @@ const AccountRoute = AccountRouteImport.update({
 const AdminRoute = AdminRouteImport.update({
   id: '/admin',
   path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CompteRoute = CompteRouteImport.update({
+  id: '/compte',
+  path: '/compte',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PanierRoute = PanierRouteImport.update({
@@ -164,6 +170,7 @@ export interface FileRoutesByFullPath {
   '/': typeof PublicIndexRoute
   '/account': typeof AccountRouteWithChildren
   '/admin': typeof AdminRouteWithChildren
+  '/compte': typeof CompteRoute
   '/panier': typeof PanierRoute
   '/beats': typeof PublicBeatsRouteWithChildren
   '/cart': typeof PublicCartRoute
@@ -187,6 +194,7 @@ export interface FileRoutesByFullPath {
   '/styles/': typeof PublicStylesIndexRoute
 }
 export interface FileRoutesByTo {
+  '/compte': typeof CompteRoute
   '/panier': typeof PanierRoute
   '/cart': typeof PublicCartRoute
   '/checkout': typeof PublicCheckoutRoute
@@ -214,6 +222,7 @@ export interface FileRoutesById {
   '/_public': typeof PublicRouteWithChildren
   '/account': typeof AccountRouteWithChildren
   '/admin': typeof AdminRouteWithChildren
+  '/compte': typeof CompteRoute
   '/panier': typeof PanierRoute
   '/_public/beats': typeof PublicBeatsRouteWithChildren
   '/_public/cart': typeof PublicCartRoute
@@ -243,6 +252,7 @@ export interface FileRouteTypes {
     | '/'
     | '/account'
     | '/admin'
+    | '/compte'
     | '/panier'
     | '/beats'
     | '/cart'
@@ -266,6 +276,7 @@ export interface FileRouteTypes {
     | '/styles/'
   fileRoutesByTo: FileRoutesByTo
   to:
+    | '/compte'
     | '/panier'
     | '/cart'
     | '/checkout'
@@ -292,6 +303,7 @@ export interface FileRouteTypes {
     | '/_public'
     | '/account'
     | '/admin'
+    | '/compte'
     | '/panier'
     | '/_public/beats'
     | '/_public/cart'
@@ -320,6 +332,7 @@ export interface RootRouteChildren {
   PublicRoute: typeof PublicRouteWithChildren
   AccountRoute: typeof AccountRouteWithChildren
   AdminRoute: typeof AdminRouteWithChildren
+  CompteRoute: typeof CompteRoute
   PanierRoute: typeof PanierRoute
 }
 
@@ -344,6 +357,13 @@ declare module '@tanstack/react-router' {
       path: '/admin'
       fullPath: '/admin'
       preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/compte': {
+      id: '/compte'
+      path: '/compte'
+      fullPath: '/compte'
+      preLoaderRoute: typeof CompteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/panier': {
@@ -585,6 +605,7 @@ const rootRouteChildren: RootRouteChildren = {
   PublicRoute: PublicRouteWithChildren,
   AccountRoute: AccountRouteWithChildren,
   AdminRoute: AdminRouteWithChildren,
+  CompteRoute: CompteRoute,
   PanierRoute: PanierRoute,
 }
 export const routeTree = rootRouteImport
