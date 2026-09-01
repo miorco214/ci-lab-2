@@ -50,8 +50,30 @@ export const adminNav: NavItem[] = [
   { to: "/admin/settings", label: "Paramètres", icon: "settings" },
 ];
 
-export function isActivePath(pathname: string, item: NavItem): boolean {
-  const base = item.match ?? item.to;
+function basePath(item: NavItem): string {
+  return item.match ?? item.to;
+}
+
+function matchesPath(pathname: string, item: NavItem): boolean {
+  const base = basePath(item);
   if (base === "/") return pathname === "/";
   return pathname === base || pathname.startsWith(`${base}/`);
 }
+
+/**
+ * État actif d'un item de navigation.
+ * Quand `group` est fourni, un seul item peut être actif : le plus spécifique
+ * (le préfixe le plus long qui correspond). Évite d'allumer « Vue d'ensemble »
+ * en même temps que la sous-page courante.
+ */
+export function isActivePath(pathname: string, item: NavItem, group?: NavItem[]): boolean {
+  if (!matchesPath(pathname, item)) return false;
+  if (!group) return true;
+  const bestLength = group.reduce(
+    (best, candidate) =>
+      matchesPath(pathname, candidate) ? Math.max(best, basePath(candidate).length) : best,
+    0,
+  );
+  return basePath(item).length === bestLength;
+}
+

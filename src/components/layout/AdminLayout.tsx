@@ -36,7 +36,7 @@ export function AdminLayout() {
                   label={item.label}
                   {...(item.icon ? { icon: item.icon } : {})}
                   variant="sidebar"
-                  active={isActivePath(pathname, item)}
+                  active={isActivePath(pathname, item, adminNav)}
                 />
               </li>
             ))}
