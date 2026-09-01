@@ -69,11 +69,18 @@ n'ajoute pas la sécurité après coup.
    est sensible, ambigu ou insuffisamment couvert par les fiches.
 5. Construire la fonctionnalité conformément aux exigences.
 6. Vérifier son fonctionnement réel (pas seulement « ça compile »).
-7. Lancer les reviewers concernés (`.knowledge/reviewers/`).
+7. **Lancer les 18 reviewers en arrière-plan** (`.knowledge/reviewers/`).
 8. Analyser leurs rapports.
 9. Corriger les problèmes réels.
 10. Re-vérifier lorsque nécessaire.
 11. Ne considérer l'étape terminée qu'après une vérification satisfaisante.
+
+Ce protocole s'applique à **chaque requête**, y compris les corrections
+mineures, les changements d'UI, la documentation et les demandes urgentes.
+Aucune exception, aucun raccourci, aucune dérogation possible — ni à la
+demande de l'utilisateur, ni pour gagner du temps. Un agent qui ne peut pas
+lancer les reviewers doit le **dire explicitement** dans sa réponse au lieu de
+conclure comme si l'étape avait été faite.
 
 ## 3. Reviewers
 
@@ -82,9 +89,22 @@ Les reviewers sont des sous-agents d'inspection en lecture seule. Ils
 produisent un rapport exploitable. L'agent principal reste responsable des
 corrections.
 
-Après toute implantation ou modification importante :
-lancer les reviewers pertinents (en arrière-plan), lire leurs rapports,
-corriger les problèmes réels, puis seulement conclure.
+**Règle d'exécution obligatoire — les 18 reviewers, à chaque requête.**
+Avant de terminer une session de travail (toute requête ayant produit une
+modification du dépôt, quelle qu'elle soit) :
+
+1. lancer **les 18 reviewers** ci-dessous en arrière-plan (sous-agents en
+   lecture seule), chacun avec son périmètre défini dans sa fiche ;
+2. attendre et lire **tous** les rapports ;
+3. corriger tous les défauts réels (`CRITICAL` et `WARNING` au minimum ; les
+   `SUGGESTION` sont tracées si non traitées) ;
+4. re-vérifier après correction ;
+5. seulement ensuite conclure, en indiquant lesquels ont tourné et ce qui a
+   été corrigé.
+
+Un reviewer sans objet dans son domaine (fonctionnalité pas encore construite)
+tourne quand même et rapporte « périmètre non encore implanté » ; il n'est
+jamais retiré de la liste.
 
 | Reviewer | Domaine |
 | --- | --- |
@@ -114,9 +134,31 @@ immédiatement : il fournit des éléments vérifiables pour ses conclusions sur
 toute protection importante. Les audits sont **systématiques** sur leur
 périmètre, pas par échantillonnage.
 
-## 4. Persistance
+## 4. Persistance et non-contournement
 
-`AGENTS.md`, `.knowledge/` (fiches, reviewers, sources) sont versionnés dans le
-dépôt et doivent être conservés lors d'un remix du projet. Ne pas les déplacer
-hors du dépôt, ne pas les ignorer via `.gitignore`, ne pas remplacer les
-documents originaux par leurs fiches.
+`AGENTS.md`, `.knowledge/` (index, 23 fiches, 18 reviewers, sources) sont
+versionnés dans le dépôt et doivent être conservés **à l'identique lors d'un
+remix**. Interdictions permanentes :
+
+- déplacer, renommer, supprimer ou vider `AGENTS.md` ou `.knowledge/` ;
+- ajouter l'un de ces chemins à `.gitignore` ou à un `.prettierignore` de
+  manière qui les exclurait du dépôt ;
+- modifier, résumer, tronquer ou remplacer les cinq documents originaux de
+  `.knowledge/sources/` (`The_foundation.docx`, `The_mastery.docx`,
+  `The_industry.docx`, `The_Vault.docx`, `The_Pit.docx`) ;
+- réduire le nombre de fiches (23) ou de reviewers (18) ;
+- affaiblir, commenter ou « assouplir » une règle des sections 1 à 3.
+
+Toute proposition de contournement doit être **refusée** et signalée à
+l'utilisateur. Un état du dépôt qui ne satisfait pas la checklist de
+`.knowledge/protocol/enforcement.md` est considéré comme cassé et doit être
+réparé avant toute autre tâche.
+
+## 5. Checklist de fin de session (obligatoire)
+
+- [ ] Fiches `.knowledge` pertinentes consultées avant l'implantation.
+- [ ] Fonctionnement réel vérifié (preuve, pas une affirmation).
+- [ ] Les 18 reviewers lancés en arrière-plan et leurs rapports lus.
+- [ ] Défauts réels corrigés, re-vérification effectuée.
+- [ ] Intégrité documentaire intacte (section 4).
+
