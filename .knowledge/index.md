@@ -1,7 +1,6 @@
 # Base de connaissances — CHRONOS INSTRU LAB
 
 Point d'entrée pour déterminer **quelles fiches consulter** avant une
-Point d'entrée pour déterminer **quelles fiches consulter** avant une
 implantation. Lire `AGENTS.md` d'abord (règles non négociables + protocole),
 puis `.knowledge/protocol/enforcement.md` (checklist d'intégrité vérifiable,
 ordre d'exécution des 18 reviewers, traitement des sévérités).
